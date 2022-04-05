@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:19:24 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/05 16:59:34 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:35:41 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,68 @@
 #include "libft/includes/libft.h"
 #include "libft/includes/ft_printf.h"
 
-/*
-static void	receive_message(char *msg, int pid_server)
+static int	ft_power(int n, int power)
 {
-	int	i;
-	int	j;
-	int	c;
+	int	result;
 
-	i = 0;
-	while (msg[i])
+	if (power < 0 || !n)
+		return (0);
+	result = 1;
+	while (power--)
+		result *= n;
+	return (result);
+}
+
+static char	mt_binary2char(char *binary)
+{
+	char	c;
+	int		i;
+	int		y;
+
+	if (!binary)
+		return (0);
+	i = 7;
+	y = 0;
+	c = 0;
+	while (i >= 0)
 	{
-		j = 8;
-		c = msg[i];
-		while (j--)
-		{
-			if (c << j & 1)
-			kill(pid_server, SIGUSR1);
-			else
-				kill(pid_server, SIGUSR2);
-			usleep(100);
-		}
-		i++;
+		if (binary[i] == '1')
+			c += ft_power(2, y);
+		i--;
+		y++;
 	}
-	j = 8;
-	while (j--)
+	return (c);
+}
+
+static void	receive_message(int signum)
+{
+	static char	buffer[9];
+	static int	i;
+	char		c;
+
+	if (signum == SIGUSR1)
+		buffer[i++] = '1';
+	else
+		buffer[i++] = '0';
+	if (i >= 8)
 	{
-		kill(pid_server, SIGUSR2);
-		usleep(100);
+		buffer[i] = '\0';
+		c = mt_binary2char(buffer);
+		if (!c)
+			ft_putchar('\n');
+		else
+			ft_putchar(c);
+		ft_bzero(buffer, 9);
+		i = 0;
 	}
 }
-*/
+
 void	my_handler(int signum)
 {
 	if (signum == SIGUSR1)
-	{
 		ft_printf("Received SIGUSR1!\n");
-	}
+	else
+		ft_printf("Eh, ben non\n");
 }
 
 int	main(void)
@@ -59,8 +85,9 @@ int	main(void)
 	pid_t	pid;
 
 	pid = getpid();
-	ft_printf("%d", pid);
-	signal(SIGUSR1, my_handler);
-	return (0);
+	ft_printf("PID: %d\n", pid);
+	signal(SIGUSR1, receive_message);
+	signal(SIGUSR2, receive_message);
+	while (1)
+		pause();
 }
-

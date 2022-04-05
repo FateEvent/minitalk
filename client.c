@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:07:03 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/05 16:52:57 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:00:14 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	send_message(int pid_server, char *msg)
 				kill(pid_server, SIGUSR1);
 			else
 				kill(pid_server, SIGUSR2);
-			usleep(100);
+			usleep(50);
 		}
 		i++;
 	}
@@ -41,7 +41,7 @@ static void	send_message(int pid_server, char *msg)
 	while (j--)
 	{
 		kill(pid_server, SIGUSR2);
-		usleep(100);
+		usleep(50);
 	}
 }
 

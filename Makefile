@@ -26,22 +26,13 @@ CURSIVE='\033[3m'
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(OBJC)
+$(NAME): $(OBJC) $(OBJS)
 	@$(MAKE) -C ./libft
 	@mv ./libft/libft.a .
 	@gcc $(FLAGS) $(OBJC) libft.a -o $(CLIENT)
 	@gcc $(FLAGS) $(OBJS) libft.a -o $(SERVER)
 	@echo $(RED)Missi$(NONE)on accomp$(GREEN)lished!$(NONE);
 	@rm $(OBJC) $(OBJS)
-
-$(OBJC): $(SRCC)
-	@gcc $(FLAGS) -c $(SRCC)
-
-$(OBJS): $(SRCS)
-	@gcc $(FLAGS) -c $(SRCS)
-
-exe: all
-	@./$(NAME)
 
 clean:
 	@$(RM) $(OBJC) $(OBJS) libft.a
