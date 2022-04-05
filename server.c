@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:19:24 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/05 20:35:41 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:36:29 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	receive_message(int signum)
 	}
 }
 
-void	my_handler(int signum)
+static void	my_handler(int signum)
 {
 	if (signum == SIGUSR1)
 		ft_printf("Received SIGUSR1!\n");

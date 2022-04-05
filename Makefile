@@ -39,7 +39,7 @@ clean:
 	@$(MAKE) clean -C ./libft
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(CLIENT) $(SERVER)
 	@$(MAKE) fclean -C ./libft
 
 re: fclean all
