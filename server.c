@@ -6,15 +6,11 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:19:24 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/05 20:36:29 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/05 21:58:32 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-#include "libft/includes/libft.h"
-#include "libft/includes/ft_printf.h"
+#include "minitalk.h"
 
 static int	ft_power(int n, int power)
 {
@@ -49,7 +45,7 @@ static char	mt_binary2char(char *binary)
 	return (c);
 }
 
-static void	receive_message(int signum)
+static void	receive_message(int signum, siginfo_t *info, void *context)
 {
 	static char	buffer[9];
 	static int	i;
@@ -64,30 +60,28 @@ static void	receive_message(int signum)
 		buffer[i] = '\0';
 		c = mt_binary2char(buffer);
 		if (!c)
+		{
 			ft_putchar('\n');
+			kill(info->si_pid, SIGUSR1);
+		}
 		else
 			ft_putchar(c);
 		ft_bzero(buffer, 9);
 		i = 0;
 	}
-}
-
-static void	my_handler(int signum)
-{
-	if (signum == SIGUSR1)
-		ft_printf("Received SIGUSR1!\n");
-	else
-		ft_printf("Eh, ben non\n");
+	context = 0;
 }
 
 int	main(void)
 {
-	pid_t	pid;
+	struct sigaction	sa;	
 
-	pid = getpid();
-	ft_printf("PID: %d\n", pid);
-	signal(SIGUSR1, receive_message);
-	signal(SIGUSR2, receive_message);
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = receive_message;
+	ft_printf("PID: %d\n", getpid());
+	sigaction(SIGUSR1, &sa, 0);
+	sigaction(SIGUSR2, &sa, 0);
 	while (1)
 		pause();
 }

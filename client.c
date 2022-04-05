@@ -6,15 +6,11 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:07:03 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/05 20:00:14 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/05 21:58:08 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-#include "libft/includes/libft.h"
-#include "libft/includes/ft_printf.h"
+#include "minitalk.h"
 
 static void	send_message(int pid_server, char *msg)
 {
@@ -45,6 +41,13 @@ static void	send_message(int pid_server, char *msg)
 	}
 }
 
+void	reception_handler(int signum)
+{
+	if (signum == SIGUSR1)
+		ft_printf("Roger!\n");
+	exit(0);
+}
+
 int	main(int argc, char *argv[])
 {
 	int	pid_server;
@@ -55,6 +58,9 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	pid_server = ft_atoi(argv[1]);
+	signal(SIGUSR1, reception_handler);
 	send_message(pid_server, argv[2]);
-	return (0);
+	sleep(3);
+	ft_printf("Houston, we have a problem!\n");
+	return (1);
 }
