@@ -16,13 +16,13 @@ CLIENT = client
 
 SERVER = server
 
-NONE='\033[0m'
-PINK='\033[1;35m'
+NONE = '\033[0m'
+PINK = '\033[1;35m'
 RED = '\033[1;31m'
 YELLOW = '\033[1;33m'
-GREEN='\033[32m'
-GRAY='\033[2;37m'
-CURSIVE='\033[3m'
+GREEN = '\033[32m'
+GRAY = '\033[2;37m'
+CURSIVE = '\033[3m'
 
 all: $(NAME)
 
