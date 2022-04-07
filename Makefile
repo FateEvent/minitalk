@@ -16,13 +16,9 @@ CLIENT = client
 
 SERVER = server
 
-NONE = '\033[0m'
-PINK = '\033[1;35m'
-RED = '\033[1;31m'
-YELLOW = '\033[1;33m'
-GREEN = '\033[32m'
-GRAY = '\033[2;37m'
-CURSIVE = '\033[3m'
+NONE = \033[0m
+RED	 = \033[31m
+GREEN =	\033[32m
 
 all: $(NAME)
 
@@ -31,7 +27,7 @@ $(NAME): $(OBJC) $(OBJS)
 	@mv ./libft/libft.a .
 	@gcc $(FLAGS) $(OBJC) libft.a -o $(CLIENT)
 	@gcc $(FLAGS) $(OBJS) libft.a -o $(SERVER)
-	@echo $(RED)Missi$(NONE)on accomp$(GREEN)lished!$(NONE);
+	@echo "$(RED)Missi$(NONE)on accomp$(GREEN)lished!$(NONE)";
 	@rm $(OBJC) $(OBJS)
 
 clean:
