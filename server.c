@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:19:24 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/05 21:58:32 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:20:45 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_power(int n, int power)
 	return (result);
 }
 
-static char	mt_binary2char(char *binary)
+static char	ft_binary2char(char *binary)
 {
 	char	c;
 	int		i;
@@ -58,7 +58,7 @@ static void	receive_message(int signum, siginfo_t *info, void *context)
 	if (i >= 8)
 	{
 		buffer[i] = '\0';
-		c = mt_binary2char(buffer);
+		c = ft_binary2char(buffer);
 		if (!c)
 		{
 			ft_putchar('\n');
