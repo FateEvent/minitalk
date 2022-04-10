@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:19:24 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/07 18:20:45 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/10 17:59:46 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	ft_binary2char(char *binary)
 
 static void	receive_message(int signum, siginfo_t *info, void *context)
 {
-	static char	buffer[9];
+	static char	buffer[8];
 	static int	i;
 	char		c;
 
