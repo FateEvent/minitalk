@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:19:24 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/15 11:45:32 by faventur         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:58:38 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_power(int n, int power)
 	return (result);
 }
 
-static char	mt_binary2char(char *binary)
+static char	ft_binary2char(char *binary)
 {
 	char	c;
 	int		i;
