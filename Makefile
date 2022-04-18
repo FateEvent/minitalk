@@ -6,17 +6,17 @@
 #    By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 11:44:58 by faventur          #+#    #+#              #
-#    Updated: 2022/04/15 11:45:04 by faventur         ###   ########.fr        #
+#    Updated: 2022/04/18 17:27:13 by faventur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCC = client.c
+SRCS_C = client.c
 
-SRCS = server.c
+SRCS_S = server.c
 
-OBJC = $(SRCC:.c=.o)
+OBJS_C = $(SRCS_C:.c=.o)
 
-OBJS = $(SRCS:.c=.o)
+OBJS_S = $(SRCS_S:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -34,16 +34,19 @@ GREEN =	\033[32m
 
 all: $(NAME)
 
-$(NAME): $(OBJC) $(OBJS)
+$(NAME): $(OBJS_C) $(OBJS_S)
 	@$(MAKE) -C ./libft
 	@mv ./libft/libft.a .
-	@gcc $(FLAGS) $(OBJC) libft.a -o $(CLIENT)
-	@gcc $(FLAGS) $(OBJS) libft.a -o $(SERVER)
+	@gcc $(FLAGS) $(OBJS_C) libft.a -o $(CLIENT)
+	@gcc $(FLAGS) $(OBJS_S) libft.a -o $(SERVER)
 	@echo "$(RED)Missi$(NONE)on accomp$(GREEN)lished!$(NONE)";
-	@rm $(OBJC) $(OBJS)
+	@rm $(OBJS_C) $(OBJS_S)
+
+.c.o:
+	gcc -Wall -Wextra -Werror -c -I./libft/includes $< -o ${<:.c=.o}
 
 clean:
-	@$(RM) $(OBJC) $(OBJS) libft.a
+	@$(RM) $(OBJS_C) $(OBJS_S) libft.a
 	@$(MAKE) clean -C ./libft
 
 fclean: clean
