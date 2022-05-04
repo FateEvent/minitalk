@@ -13,7 +13,7 @@
 /*
 ** The ft_lstdelone() function frees the memory of the element passed
 ** as a parameter with the del function and free(3). The memory of
-** next mustn-t be freed.
+** next mustn't be freed.
 */
 
 #include "libft.h"
