@@ -17,6 +17,16 @@
 # include <stdlib.h>
 # include <string.h>
 
+typedef struct s_split
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	tab_size;
+	size_t	str_len;
+	char	**strtab;
+}					t_split;
+
 typedef struct s_list
 {
 	void			*content;
@@ -83,6 +93,7 @@ void	ft_putstr_fd(char const *str, int fd);
 void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putnbr_base(int nbr, char *base);
+char	**ft_arr_freer_index(char **arr, size_t *index);
 
 // Bonus functions
 t_list	*ft_lstnew(void *content);

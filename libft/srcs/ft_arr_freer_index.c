@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_arr_freer_index.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 15:00:43 by faventur          #+#    #+#             */
-/*   Updated: 2022/09/24 18:22:31 by faventur         ###   ########.fr       */
+/*   Created: 2022/06/27 16:44:33 by faventur          #+#    #+#             */
+/*   Updated: 2022/11/21 10:41:41 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** The strlen() function calculates the length of the string s, excluding
-** the terminating null byte.
-** 
-** Return Value: The strlen() function returns the number of bytes in the
-** string s.
-*/
-
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	**ft_arr_freer_index(char **arr, size_t *index)
 {
-	size_t	counter;
+	ssize_t	i;
 
-	if (!str)
-		return (0);
-	counter = 0;
-	while (*str != '\0')
+	if (!arr)
+		return (NULL);
+	i = *index - 1;
+	while (i >= 0)
 	{
-		counter++;
-		str++;
+		free(arr[i]);
+		arr[i] = NULL;
+		i--;
 	}
-	return (counter);
+	free(arr);
+	arr = NULL;
+	return (arr);
 }

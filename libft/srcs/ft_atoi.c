@@ -6,7 +6,7 @@
 /*   By: faventur <faventur@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 20:54:51 by faventur          #+#    #+#             */
-/*   Updated: 2022/04/04 16:09:09 by faventur         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:08:06 by faventur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 int	ft_atoi(const char *nptr)
 {
 	int		counter;
-	int		res;
-	char	*charptr;
+	long	res;
 
 	counter = 0;
 	res = 0;
@@ -31,16 +30,13 @@ int	ft_atoi(const char *nptr)
 		nptr++;
 	if ((*nptr && *nptr == '-' && counter++ == 0) || (*nptr && *nptr == '+'))
 		nptr++;
-	charptr = (char *)nptr;
-	while ((*charptr >= '0' && *charptr <= '9'))
-		charptr++;
-	if (counter == 0 && (charptr - nptr) > 10)
-		return (-1);
-	else if (counter == 1 && (charptr - nptr) > 11)
-		return (0);
 	while ((*nptr >= '0' && *nptr <= '9') && *nptr)
 		res = res * 10 + (*nptr++ - '0');
 	if (counter == 1)
 		res *= -1;
+	if (res > 2147483647)
+		return (-1);
+	if (res < -2147483648)
+		return (0);
 	return (res);
 }
